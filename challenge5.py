@@ -24,6 +24,7 @@
 import pyrax
 from os.path import expanduser
 from time import sleep
+import pprint
 
 
 if __name__ == '__main__':
@@ -33,8 +34,9 @@ if __name__ == '__main__':
     instance_name = 'name goes here'
     db_name = 'db_name_here'
     username = 'marx'
-    password = 'what this is i don\'t even'
+    password = 'what this is i do not even'
     inst = cdb.create(instance_name, flavor=flavor, volume=2)
+    db = None
 
     while True:
         sleep(60)
@@ -50,5 +52,6 @@ if __name__ == '__main__':
         else:
             continue
         break
-    print inst
-    print db
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(vars(inst))
+    pp.pprint(vars(db))
