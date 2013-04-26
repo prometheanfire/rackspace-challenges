@@ -23,6 +23,7 @@
 """
 
 
+from __future__ import print_function
 import pyrax
 from os.path import expanduser
 from time import strftime, sleep, gmtime
@@ -45,11 +46,11 @@ if __name__ == '__main__':
                 if image.status == 'ACTIVE':
                     server = cs.servers.create(image.name + 'DUP!',
                                                image.id, flavor.id)
-                    print "Name:", server.name
-                    print "ID:", server.id
-                    print "Status:", server.status
-                    print "Admin Password:", server.adminPass
-                    print "Networks:", server.networks
+                    print("Name:", server.name)
+                    print("ID:", server.id)
+                    print("Status:", server.status)
+                    print("Admin Password:", server.adminPass)
+                    print("Networks:", server.networks)
                     break
         else:
             continue

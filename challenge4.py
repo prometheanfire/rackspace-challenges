@@ -19,6 +19,8 @@
  *Worth 1 Point*
 """
 
+
+from __future__ import print_function
 import argparse
 import pyrax
 import re
@@ -63,12 +65,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if args.veryverbose:
         args.verbose = True
-        print parser.parse_args()
+        print(parser.parse_args())
     if not is_valid_hostname(args.hostname):
-        print 'You need to give me a valid hostname'
+        print('You need to give me a valid hostname')
         exit()
     if not is_valid_ip(args.address):
-        print 'You need to give me a valid IP address'
+        print('You need to give me a valid IP address')
         exit()
     dns_dict_list = [{'type': 'A',
                       'name': args.hostname,

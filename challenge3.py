@@ -24,6 +24,7 @@
 """
 
 
+from __future__ import print_function
 import pyrax
 from os.path import expanduser
 from os import path
@@ -43,7 +44,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if not path.isdir(args.dir):
-        print 'You gave me a bad directory to sync'
+        print('You gave me a bad directory to sync')
         exit()
 
     cf = pyrax.cloudfiles

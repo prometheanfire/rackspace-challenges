@@ -21,6 +21,7 @@
 """
 
 
+from __future__ import print_function
 import pyrax
 from os.path import expanduser
 from time import sleep
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     cs = pyrax.cloudservers
     clb = pyrax.cloud_loadbalancers
     image = [image for image in cs.images.list()
-             if "Gentoo 12.3" in image.name][0]
+             if "Gentoo 13.1" in image.name][0]
     flavor = [flavor for flavor in cs.flavors.list()
               if flavor.ram == 512][0]
     #create the servers
@@ -52,4 +53,4 @@ if __name__ == '__main__':
     vip = clb.VirtualIP(type="PUBLIC")
     lb = clb.create("example_lb", port=80, protocol="HTTP",
                     nodes=[node1, node2], virtual_ips=[vip])
-    print [(lb.name, lb.id) for lb in clb.list()]
+    print([(lb.name, lb.id) for lb in clb.list()])

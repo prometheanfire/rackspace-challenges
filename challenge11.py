@@ -24,6 +24,8 @@
  Worth 6 points
 """
 
+
+from __future__ import print_function
 import pyrax
 import statics
 from time import sleep
@@ -38,8 +40,8 @@ if __name__ == '__main__':
     dns = pyrax.cloud_dns
 
     #build network
-    network = cnw.create("challenge11", cidr="192.168.0.0/24")
-    networks = network.get_server_networks(public=True, private=True)
+    #network = cnw.create("challenge11", cidr="192.168.0.0/24")
+    #networks = network.get_server_networks(public=True, private=True)
 
     #build CBS volumes
     vol1 = cbs.create(name="challenge11-1", size=100, volume_type="SATA")
@@ -49,21 +51,21 @@ if __name__ == '__main__':
     #build instances
     images = cs.images.list()
     image = [image for image in cs.images.list()
-             if 'Gentoo 12.3' in image.name][0]
+             if 'Gentoo 13.1' in image.name][0]
     flavor = [flavor for flavor in cs.flavors.list()
               if flavor.ram == 512][0]
     server1 = cs.servers.create('challenge11-1.example-mthode.org',
                                 image.id,
-                                flavor.id,
-                                nics=networks)
+                                flavor.id)
+                                #nics=networks)
     server2 = cs.servers.create('challenge11-2.example-mthode.org',
                                 image.id,
-                                flavor.id,
-                                nics=networks)
+                                flavor.id)
+                                #nics=networks)
     server3 = cs.servers.create('challenge11-3.example-mthode.org',
                                 image.id,
-                                flavor.id,
-                                nics=networks)
+                                flavor.id)
+                                #nics=networks)
 
     server1_pass = server1.adminPass
     server2_pass = server2.adminPass
@@ -114,17 +116,17 @@ if __name__ == '__main__':
                records=dns_dict_list)
 
     #print the server info
-    print "ID:", server1.id
-    print "Status:", server1.status
-    print "Admin password:", server1_pass
-    print "Networks:", server1.networks
-    print
-    print "ID:", server2.id
-    print "Status:", server2.status
-    print "Admin password:", server2_pass
-    print "Networks:", server2.networks
-    print
-    print "ID:", server3.id
-    print "Status:", server3.status
-    print "Admin password:", server3_pass
-    print "Networks:", server3.networks
+    print("ID:", server1.id)
+    print("Status:", server1.status)
+    print("Admin password:", server1_pass)
+    print("Networks:", server1.networks)
+    print()
+    print("ID:", server2.id)
+    print("Status:", server2.status)
+    print("Admin password:", server2_pass)
+    print("Networks:", server2.networks)
+    print()
+    print("ID:", server3.id)
+    print("Status:", server3.status)
+    print("Admin password:", server3_pass)
+    print("Networks:", server3.networks)

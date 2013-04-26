@@ -45,6 +45,8 @@ if __name__ == '__main__':
     cbs_dfw = pyrax.connect_to_cloud_blockstorage("DFW")
     dns_ord = pyrax.connect_to_cloud_dns("ORD")
     dns_dfw = pyrax.connect_to_cloud_dns("DFW")
+    lbs_ord = pyrax.connect_to_cloud_loadbalancers("ORD")
+    lbs_dfw = pyrax.connect_to_cloud_loadbalancers("DFW")
 
     print('deleting servers')
     for server in cs_ord.servers.list():
@@ -100,7 +102,6 @@ if __name__ == '__main__':
             continue
         network.delete()
 
-
     print('deleting volumes and volume snapshots')
     for vol in cbs_ord.list():
         while not vol.list_snapshots() == []:
@@ -112,5 +113,12 @@ if __name__ == '__main__':
             vol.delete_all_snapshots()
             sleep(10)
         vol.delete()
+
+    print('deleting load balancers')
+    for lb in lbs_dfw.list():
+        lb.delete()
+    for lb in lbs_ord.list():
+        lb.delete()
+
 
     print('finished')

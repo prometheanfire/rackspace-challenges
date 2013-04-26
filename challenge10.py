@@ -45,7 +45,7 @@ if __name__ == '__main__':
     #get the image and flavor I want to use, then build the instances
     images = cs.images.list()
     image = [image for image in cs.images.list()
-             if 'Gentoo 12.3' in image.name][0]
+             if 'Gentoo 13.1' in image.name][0]
     flavor = [flavor for flavor in cs.flavors.list()
               if flavor.ram == 512][0]
     server1 = cs.servers.create('challenge10-1.example-mthode.org',

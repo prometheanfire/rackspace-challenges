@@ -22,8 +22,8 @@
  *Worth 1 point*
 """
 
+from __future__ import print_function
 import pyrax
-#import challenges_lib
 import argparse
 from os.path import expanduser
 
@@ -41,22 +41,22 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if args.veryverbose:
         args.verbose = True
-        print parser.parse_args()
+        print(parser.parse_args())
     if args.count < 1:
-        print 'invalid number of servers'
+        print('invalid number of servers')
 
     pyrax.set_credential_file(expanduser("~/.rackspace_cloud_credentials"))
     cs = pyrax.cloudservers
     image = [image for image in cs.images.list()
-                if "Gentoo 12.3" in image.name][0]
+             if "Gentoo 13.1" in image.name][0]
     flavor = [flavor for flavor in cs.flavors.list()
               if flavor.ram == 512][0]
 
     for count in xrange(1, args.count + 1):
         server_name = args.name + str(count)
         server = cs.servers.create(server_name, image.id, flavor.id)
-        print "Name:", server.name
-        print "ID:", server.id
-        print "Status:", server.status
-        print "Admin Password:", server.adminPass
-        print "Networks:", server.networks
+        print("Name:", server.name)
+        print("ID:", server.id)
+        print("Status:", server.status)
+        print("Admin Password:", server.adminPass)
+        print("Networks:", server.networks)

@@ -22,6 +22,8 @@
  Worth 2 Points
 """
 
+
+from __future__ import print_function
 import pyrax
 import argparse
 import re
@@ -91,19 +93,19 @@ if __name__ == '__main__':
         if flavor.id == args.flavor:
             flavor_found = True
     if not is_valid_hostname(args.fqdn):
-        print 'You need to give me a valid hostname'
+        print('You need to give me a valid hostname')
         exit()
     if not image_found:
-        print 'Invalid Image ID given, here is a list of valid Image IDs\n'
-        print '               Image ID                   Image Name'
+        print('Invalid Image ID given, here is a list of valid Image IDs\n')
+        print('               Image ID                   Image Name')
         for image in images:
-            print image.id, '    ', image.name
+            print(image.id, '    ', image.name)
         exit()
     if not flavor_found:
-        print 'Invalid Flavor ID given, here is a list of valid Flavor IDs\n'
-        print 'ID Name'
+        print('Invalid Flavor ID given, here is a list of valid Flavor IDs\n')
+        print('ID Name')
         for flavor in flavors:
-            print flavor.id, '', flavor.name
+            print(flavor.id, '', flavor.name)
         exit()
 
     #creating instance
